@@ -5,33 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:background="@drawable/gradient_list"
     android:id="@+id/layout"
-    android:background="@drawable/backgroud"
-    android:theme="@style/CardView.Dark"
-
-
     >
 
     <TextView
         android:id="@+id/mainText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-
-        android:layout_centerInParent="true"
-        android:layout_marginTop="115dp"
         android:background="#00C4E3D9"
         android:backgroundTint="#00ECDADA"
         android:backgroundTintMode="src_in"
         android:breakStrategy="high_quality"
-
-        android:fontFamily="serif"
         android:text="Loading..."
-        android:textAlignment="center"
-        android:textColor="#988787"
         android:textSize="40sp"
+        android:layout_alignParentLeft="true"
+        android:textAlignment="center"
         android:textStyle="bold|italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -39,98 +31,16 @@
         app:layout_constraintVertical_bias="0.281" />
 
     <TextView
-        android:id="@+id/presntage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/presntage"
         android:layout_below="@id/mainText"
-        android:fontFamily="sans-serif-condensed-medium"
         android:text="Loding..."
-        android:textAlignment="center"
-        android:textColor="#DDD5AD"
         android:textSize="20dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="259dp" />
-
-    <TextView
-        android:id="@+id/TotalPre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-
-        android:layout_marginBottom="315dp"
-        android:text="Total"
-        android:textSize="30sp"
-        android:textColor="#70C0FF"
-
-
-        />
-
-    <TextView
-        android:id="@+id/SmoothPre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="250dp"
-        android:text="Smooth Predictions"
-        android:textSize="25sp"
-        android:textColor="#775D95"
-        />
-
-    <TextView
-        android:id="@+id/bupmyPre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="200dp"
-        android:text="Bumpy   Predictions"
-        android:textSize="25sp"
-        android:textColor="#BC7373"
-        />
-
-    <TextView
-        android:id="@+id/SmoothConf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="150dp"
-        android:text="Smooth confidence"
-        android:textSize="25sp"
-        android:textColor="#8C6BB1"
-        />
-
-    <TextView
-        android:id="@+id/bupmyConf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="100dp"
-        android:text="Bumpy   confidence"
-        android:textSize="25sp"
-        android:textColor="#BC7373"
-        />
+        tools:layout_editor_absoluteY="259dp"
+        tools:ignore="MissingConstraints" />
 
 </RelativeLayout>

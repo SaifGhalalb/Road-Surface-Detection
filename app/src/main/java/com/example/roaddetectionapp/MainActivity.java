@@ -20,7 +20,6 @@ import com.chaquo.python.android.AndroidPlatform;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -30,16 +29,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static final String TAG = "MainActivity";
     private SensorManager sensorManager;
     Sensor accelermeter, gyro;
-    TextView mainText,persntage,totalPredictionsTextView,smoothPredictionsTextView,
-            bumpyPredictionsTextView,overAllConfidenceSmoothTextView,overAllConfidenceBumpyTextView;
+    TextView mainText,persntage;
     StringBuilder accData = new StringBuilder();
     String temp = "";
-    int totalPredictions;
-    int smoothPredictions;
-    int bumpyPredictions;
-    float overAllConfidenceSmooth;
-    float overAllConfidenceBumpy;
-
 
 
     @Override
@@ -49,12 +41,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mainText = (TextView) findViewById(R.id.mainText);
         persntage = (TextView) findViewById(R.id.presntage);
-        totalPredictionsTextView = (TextView) findViewById(R.id.TotalPre);
-        smoothPredictionsTextView= (TextView) findViewById(R.id.SmoothPre);
-        bumpyPredictionsTextView= (TextView) findViewById(R.id.bupmyPre);
-        overAllConfidenceSmoothTextView= (TextView) findViewById(R.id.SmoothConf);
-        overAllConfidenceBumpyTextView= (TextView) findViewById(R.id.bupmyConf);
 
+
+        RelativeLayout constraintLayout = findViewById(R.id.layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(1000);
+        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.start();
 
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(this));
@@ -165,8 +158,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         // Call SMV to predict data after the N record got collected and calculated-----------
         if (done3 ){
-            totalPredictions++;
-
             //Calling the SMV and show data to screen
             String response =sendToSVM(tempData);
             String [] dataOut=response.split("@");
@@ -174,34 +165,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Float confidence=Float.parseFloat(dataOut[1]);
             mainText.setText(roadType);
             persntage.setText("Confidence: "+confidence+"%");
-            if(roadType.contains("Bumpy")){
-                mainText.setTextColor(Color.parseColor("#FF670B0B"));
-                bumpyPredictions++;
-                overAllConfidenceBumpy+=confidence;
-            }
-            else {
-                mainText.setTextColor(Color.parseColor("#988787"));
-                smoothPredictions++;
-                overAllConfidenceSmooth+=confidence;
-            }
-            double smoothPercentage=0;
-            double bumpyPercentage=0;
-            if (smoothPredictions!=0)
-             smoothPercentage=(smoothPredictions/totalPredictions)*100.0;
-            if(bumpyPredictions!=0)
-            bumpyPercentage=(bumpyPredictions/totalPredictions)*100.0;
 
-            //Log.d(TAG, "bumpy: " + bumpyPercentage);
-            //Log.d(TAG, "smooth: " + smoothPercentage);
-
-
-
-            totalPredictionsTextView.setText("Total: "+totalPredictions);
-            smoothPredictionsTextView.setText("Smooth Predictions: "+smoothPredictions);
-            bumpyPredictionsTextView.setText("Bumpy Predictions: "+bumpyPredictions);
-            overAllConfidenceSmoothTextView.setText("Smooth confidence: "+Math.round(overAllConfidenceSmooth/smoothPredictions)+"%");
-            overAllConfidenceBumpyTextView.setText("Bumpy confidence: "+Math.round(overAllConfidenceBumpy/bumpyPredictions)+"%");
-
+            if(roadType.contains("Bumpy")){ mainText.setTextColor(Color.RED); }
+            else mainText.setTextColor(Color.BLACK);
 
             //clear the current record to start a new one
             tempData="";
